@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-paper: #f6f3eb;
+    --bg-card: #fdfbf7;
+    --border-ink: #231f1c;
+    --ink-muted: #5e574d;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-paper);
+    color: var(--border-ink);
+    overflow-x: hidden;
+  }
+}
+
+/* Typography styles matching the Kraft theme */
+.font-sketch {
+  font-family: 'Cabin Sketch', cursive, sans-serif;
+}
+
+.font-hand {
+  font-family: 'Caveat', cursive, sans-serif;
+}
+
+.font-scribble {
+  font-family: 'Gloria Hallelujah', cursive, sans-serif;
+}
+
+.font-code {
+  font-family: 'Space Mono', monospace;
+}
+
+/* Paper and Sketch Border utilities */
+.sketch-border {
+  border: 2px solid #28241f;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+
+.sketch-border-sm {
+  border: 1.5px solid #28241f;
+  border-radius: 4px 250px 3px / 250px 3px 245px 3px;
+}
+
+.sketch-border-thick {
+  border: 3px solid #28241f;
+  border-radius: 255px 20px 225px 20px/20px 225px 20px 255px;
+}
+
+.sketch-shadow {
+  box-shadow: 4px 5px 0px rgba(35, 30, 25, 0.18);
+}
+
+.sketch-shadow-lg {
+  box-shadow: 8px 10px 0px rgba(35, 30, 25, 0.16);
+}
+
+.sketch-shadow-sm {
+  box-shadow: 2px 3px 0px rgba(35, 30, 25, 0.14);
+}
+
+.sketch-button {
+  border: 2px solid #28241f;
+  border-radius: 2px 255px 3px / 255px 5px 225px 3px;
+  box-shadow: 3px 4px 0px rgba(35, 30, 25, 0.2);
+  transition: all 0.15s ease-out;
+}
+
+.sketch-button:hover {
+  transform: translate(-1px, -2px);
+  box-shadow: 5px 6px 0px rgba(35, 30, 25, 0.25);
+}
+
+.sketch-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px rgba(35, 30, 25, 0.25);
+}
+
+/* Torn paper edge simulation */
+.torn-paper {
+  clip-path: polygon(
+    0% 0%, 4% 0.5%, 8% 0%, 12% 0.6%, 16% 0%, 20% 0.5%, 24% 0%, 28% 0.6%, 32% 0%, 36% 0.5%, 40% 0%, 
+    44% 0.6%, 48% 0%, 52% 0.5%, 56% 0%, 60% 0.6%, 64% 0%, 68% 0.5%, 72% 0%, 76% 0.6%, 80% 0%, 
+    84% 0.5%, 88% 0%, 92% 0.6%, 96% 0%, 100% 0.4%,
+    100% 0%, 99.5% 10%, 100% 20%, 99.4% 30%, 100% 40%, 99.5% 50%, 100% 60%, 99.4% 70%, 100% 80%, 99.5% 90%, 100% 100%,
+    96% 99.5%, 92% 100%, 88% 99.4%, 84% 100%, 80% 99.5%, 76% 100%, 72% 99.4%, 68% 100%, 64% 99.5%, 60% 100%,
+    56% 99.4%, 52% 100%, 48% 99.5%, 44% 100%, 40% 99.4%, 36% 100%, 32% 99.5%, 28% 100%, 24% 99.4%, 20% 100%,
+    16% 99.5%, 12% 100%, 8% 99.4%, 4% 100%, 0% 99.6%,
+    0.5% 90%, 0% 80%, 0.6% 70%, 0% 60%, 0.5% 50%, 0% 40%, 0.6% 30%, 0% 20%, 0.5% 10%, 0% 0%
+  );
+}
+
+/* Washi tape strip visual */
+.washi-tape {
+  position: relative;
+}
+
+.washi-tape::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 90px;
+  height: 24px;
+  background-color: rgba(220, 205, 175, 0.75);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-left: 2px dashed rgba(180, 160, 130, 0.5);
+  border-right: 2px dashed rgba(180, 160, 130, 0.5);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Paper subtle noise / grid background */
+.bg-kraft-grid {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(40, 35, 30, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(40, 35, 30, 0.035) 1px, transparent 1px);
+}
+
+.bg-kraft-lined {
+  background-size: 100% 28px;
+  background-image: linear-gradient(to bottom, transparent 27px, rgba(50, 100, 180, 0.08) 28px);
+}
+
+/* Subtle hand-drawn wiggle effect for interactive elements */
+@keyframes sketchWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-0.5deg); }
+  75% { transform: rotate(0.6deg); }
+}
+
+.hover-wiggle:hover {
+  animation: sketchWiggle 0.4s ease infinite;
+}
+
+/* Custom hand-drawn scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1ede2;
+  border-left: 1px solid rgba(40, 35, 30, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c8beaf;
+  border: 1.5px solid #28241f;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9b8f7e;
+}
+
