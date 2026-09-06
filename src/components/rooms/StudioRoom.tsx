@@ -34,6 +34,10 @@ export const StudioRoom: React.FC<StudioRoomProps> = ({ onBackToCorridor, onNavi
     return () => window.removeEventListener('avatar-updated', handleAvatarUpdate);
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+
   const handleFileUpload = (file: File) => {
     if (!file.type.startsWith('image/')) return;
     const reader = new FileReader();
@@ -97,7 +101,7 @@ export const StudioRoom: React.FC<StudioRoomProps> = ({ onBackToCorridor, onNavi
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
+    <div id="about-chamber" className="max-w-5xl mx-auto px-4 py-6 sm:py-8 scroll-mt-24">
       {/* Top Header Navigation */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-8 border-b-2 border-[#28241f] pb-4">
         <button

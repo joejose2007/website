@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Github, ExternalLink, Shield, Network, Eye, CheckCircle2, FileSearch, Sparkles } from 'lucide-react';
 import { PROJECTS, PERSONAL_INFO } from '../../data/portfolioData';
 import { MetadataGuardDemo } from '../interactive/MetadataGuardDemo';
@@ -16,8 +16,12 @@ export const GalleryRoom: React.FC<GalleryRoomProps> = ({ onBackToCorridor, onNa
   const localMonitor = PROJECTS.find(p => p.id === 'local-network-monitor')!;
   const visualizer = PROJECTS.find(p => p.id === 'network-visualizer')!;
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
+    <div id="projects-chamber" className="max-w-5xl mx-auto px-4 py-6 sm:py-8 scroll-mt-24">
       {/* Top Navigation */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-8 border-b-2 border-[#28241f] pb-4">
         <button

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Shield, Terminal, Code, Cpu, Network, FileSearch, Bot, CheckCircle, Sparkles, BookOpen } from 'lucide-react';
 import {
   CYBERSECURITY_DOMAINS,
@@ -26,8 +26,12 @@ export const WorkshopRoom: React.FC<WorkshopRoomProps> = ({
   onNavigateRoom,
   onOpenTerminal,
 }) => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
+    <div id="skills-chamber" className="max-w-5xl mx-auto px-4 py-6 sm:py-8 scroll-mt-24">
       {/* Top Navigation */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-8 border-b-2 border-[#28241f] pb-4">
         <button

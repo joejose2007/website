@@ -8,6 +8,8 @@ export const PERSONAL_INFO = {
   githubHandle: 'github.com/joejose2007',
   instagramUrl: 'https://instagram.com/_joeee__.__',
   instagramHandle: '@_joeee__.__',
+  linkedinUrl: 'https://linkedin.com/in/joe-jose',
+  linkedinHandle: 'linkedin.com/in/joe-jose',
   educationDegree: 'Bachelor of Technology — Computer Science & Engineering',
   educationStatus: 'Currently pursuing',
   motto: 'Build, break, investigate, experiment, and build again.',

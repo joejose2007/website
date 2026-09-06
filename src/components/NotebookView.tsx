@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Navigation, ArrowUp, Terminal, Compass, Shield, Code, Cpu, ExternalLink, Mail, Github, Instagram, CheckCircle2 } from 'lucide-react';
+import { BookOpen, Navigation, ArrowUp, Terminal, Compass, Shield, Code, Cpu, ExternalLink, Mail, Github, Instagram, Linkedin, CheckCircle2 } from 'lucide-react';
 import {
   PERSONAL_INFO,
   CORE_STRENGTHS,
@@ -49,9 +49,19 @@ export const NotebookView: React.FC<NotebookViewProps> = ({
     return () => window.removeEventListener('avatar-updated', handleAvatarUpdate);
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+
   const scrollToTop = () => {
     sounds.playPaperRustle();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleTabChange = (tabId: typeof activeTab) => {
+    sounds.playPaperClick();
+    setActiveTab(tabId);
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };
 
   const metadataGuard = PROJECTS.find(p => p.id === 'metadataguard')!;
@@ -97,11 +107,8 @@ export const NotebookView: React.FC<NotebookViewProps> = ({
             <button
               key={tab.id}
               type="button"
-              onClick={() => {
-                sounds.playPaperClick();
-                setActiveTab(tab.id as typeof activeTab);
-              }}
-              className={`px-3 py-1.5 sketch-border-sm transition-all ${
+              onClick={() => handleTabChange(tab.id as typeof activeTab)}
+              className={`px-3 py-1.5 sketch-border-sm transition-all cursor-pointer ${
                 activeTab === tab.id
                   ? 'bg-[#ebd7b0] text-[#28241f] font-bold shadow-xs'
                   : 'bg-white hover:bg-stone-50 text-stone-700'
@@ -378,7 +385,7 @@ export const NotebookView: React.FC<NotebookViewProps> = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
               <div className="p-4 bg-[#fdfbf7] sketch-border-sm">
                 <Mail className="w-5 h-5 text-amber-900 mb-2" />
                 <div className="font-sketch text-lg font-bold text-[#28241f]">Email</div>
@@ -388,7 +395,7 @@ export const NotebookView: React.FC<NotebookViewProps> = ({
               </div>
 
               <div className="p-4 bg-[#fdfbf7] sketch-border-sm">
-                <Github className="w-5 h-5 text-amber-900 mb-2" />
+                <Github className="w-5 h-5 text-stone-900 mb-2" />
                 <div className="font-sketch text-lg font-bold text-[#28241f]">GitHub</div>
                 <a href={PERSONAL_INFO.githubUrl} target="_blank" rel="noopener noreferrer" className="font-code text-xs text-stone-800 hover:underline block mt-1">
                   {PERSONAL_INFO.githubHandle}
@@ -396,10 +403,18 @@ export const NotebookView: React.FC<NotebookViewProps> = ({
               </div>
 
               <div className="p-4 bg-[#fdfbf7] sketch-border-sm">
-                <Instagram className="w-5 h-5 text-amber-900 mb-2" />
+                <Instagram className="w-5 h-5 text-pink-700 mb-2" />
                 <div className="font-sketch text-lg font-bold text-[#28241f]">Instagram</div>
                 <a href={PERSONAL_INFO.instagramUrl} target="_blank" rel="noopener noreferrer" className="font-code text-xs text-stone-800 hover:underline block mt-1">
                   {PERSONAL_INFO.instagramHandle}
+                </a>
+              </div>
+
+              <div className="p-4 bg-[#fdfbf7] sketch-border-sm">
+                <Linkedin className="w-5 h-5 text-blue-700 mb-2" />
+                <div className="font-sketch text-lg font-bold text-[#28241f]">LinkedIn</div>
+                <a href={PERSONAL_INFO.linkedinUrl} target="_blank" rel="noopener noreferrer" className="font-code text-xs text-stone-800 hover:underline block mt-1">
+                  {PERSONAL_INFO.linkedinHandle}
                 </a>
               </div>
             </div>

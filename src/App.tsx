@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { RoomId } from './types';
 import { sounds } from './utils/audio';
 import { Preloader } from './components/Preloader';
@@ -19,6 +19,21 @@ export default function App() {
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+
+  // Disable browser automatic scroll restoration to avoid landing halfway on reload/navigation
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+
+  // Global scroll restoration: Every new room/view ALWAYS opens at scroll position 0
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [currentRoom, viewMode]);
 
   useEffect(() => {
     setIsMuted(sounds.getIsMuted());
@@ -51,13 +66,20 @@ export default function App() {
 
   const handleSelectRoom = (room: RoomId) => {
     setCurrentRoom(room);
-    if (viewMode === 'notebook' && room === 'corridor') {
+    if (viewMode === 'notebook') {
       setViewMode('corridor');
     }
+    // Guarantee instant top scroll
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   };
 
   const handleToggleViewMode = () => {
     setViewMode((prev) => (prev === 'corridor' ? 'notebook' : 'corridor'));
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   };
 
   return (
